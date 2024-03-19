@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Calculator styling */
+        .calculator {
+            background-color: #4CAF50;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin: 0 auto;
+            width: 300px;
+            margin-top: 50px;
+        }
+
+        .calculator input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 20px;
+            text-align: right;
+            background-color: #fff;
+        }
+
+        .calculator .numbers {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .calculator .numbers button {
+            width: calc(25% - 5px);
+            padding: 10px;
+            margin: 0;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #fff;
+            color: #4CAF50;
+        }
+
+        .calculator .operators {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .calculator .operators button {
+            width: calc(25% - 5px);
+            padding: 10px;
+            margin: 0;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .calculator .operators button:hover {
+            background-color: #45a049;
+        }
+
+        .calculator button:hover {
+            background-color: #e7e7e7;
+        }
+    </style>
+</head>
+<body style="background-color: #f2f2f2;">
+<div class="container">
+    <h2 style="color: #4CAF50;">Calculator</h2>
+    <div class="calculator">
+        <input type="text" id="expression" name="expression" readonly>
+        <div class="numbers">
+            <button onclick="appendToExpression('1')">1</button>
+            <button onclick="appendToExpression('2')">2</button>
+            <button onclick="appendToExpression('3')">3</button>
+            <button onclick="appendToExpression('4')">4</button>
+        </div>
+        <div class="numbers">
+            <button onclick="appendToExpression('5')">5</button>
+            <button onclick="appendToExpression('6')">6</button>
+            <button onclick="appendToExpression('7')">7</button>
+            <button onclick="appendToExpression('8')">8</button>
+        </div>
+        <div class="numbers">
+            <button onclick="appendToExpression('9')">9</button>
+            <button onclick="appendToExpression('0')">0</button>
+            <button onclick="appendToExpression('.')">.</button>
+            <button onclick="clearExpression()">C</button>
+        </div>
+        <div class="operators">
+            <button onclick="appendToExpression('+')">+</button>
+            <button onclick="appendToExpression('-')">-</button>
+            <button onclick="appendToExpression('*')">*</button>
+            <button onclick="appendToExpression('/')">/</button>
+        </div>
+        <div class="operators">
+            <button onclick="appendToExpression('**')">^2</button>
+            <button onclick="calculateSquareRoot()">√</button>
+            <button onclick="calculateExpression()" style="width: calc(50% - 5px); background-color: #4CAF50; color: #fff;">=</button>
+        </div>
+    </div>
+    <div id="result" style="color: #4CAF50;"></div>
+</div>
+
+<script>
+    function appendToExpression(value) {
+        document.getElementById("expression").value += value;
+    }
+
+    function clearExpression() {
+        document.getElementById("expression").value = '';
+        document.getElementById("result").innerText = '';
+    }
+
+    function calculateExpression() {
+        var expression = document.getElementById("expression").value;
+        var result;
+        try {
+            result = eval(expression);
+        } catch (e) {
+            result = "Error: " + e.message;
+        }
+        document.getElementById("result").innerText = "Result: " + result;
+    }
+
+    function calculateSquareRoot() {
+        var expression = document.getElementById("expression").value;
+        var result;
+        try {
+            result = Math.sqrt(eval(expression));
+        } catch (e) {
+            result = "Error: " + e.message;
+        }
+        document.getElementById("result").innerText = "Result: " + result;
+    }
+</script>
+</body>
+</html>
